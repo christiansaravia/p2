@@ -12,53 +12,48 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
         <script src="https://use.fontawesome.com/edf8d2d607.js"></script>
-
         <!-- PHP Logic -->
         <?php require 'logic.php'; ?>
     </head>
-
     <body>
+        <div class="container">
+            <h1 class="text-center">Christian's xkcd Password Generator</h1>
+            <br>
+            <!-- Password Generated -->
+            <p class="text-center lead"><mark><?php echo $password_with_dashes; ?></mark></p>
+            <!-- End of Password Generated -->
+            <br>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
 
-    <div class="container">
+                    <!-- Form -->
+                    <form action="index.php" method="GET">
 
-        <h1 class="text-center">Christian's xkcd Password Generator</h1>
-        <br>
+                        <div class="form-group <?php echo $errorClass; ?>">
+                            <label>Number of words (#)</label>
+                            <input class="form-control" type="text" name="num_of_words" placeholder="Maximum 9">
+                            <?php if (isset($errorMessage)) { echo $errorMessage; } ?>
+                        </div>
 
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="add_number"> Add a number
+                            </label>
+                        </div>
 
-        <!-- Password Generated -->
-        <p class="text-center lead"><mark><?php echo $password; ?></mark></p>
-        <br>
-        <!-- End of Password Generated -->
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="add_symbol"> Add a symbol
+                            </label>
+                        </div>
 
-
-        <div class="row">
-            <div class="col-xs-8 col-xs-offset-2">
-
-                <!-- Form -->
-                <form class="" action="index.php" method="GET">
-                    <div class="form-group has-error">
-                        <label># of words</label>
-                        <input type="text" name="one" class="form-control" placeholder="Maximum 9" aria-describedby="textBlock1">
-                        <span id="textBlock1" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Add a number
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Add a symbol
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-success btn-md btn-block">Get a new password!</button>
-                </form>
-                <!-- End of Form -->
-
+                        <button type="submit" class="btn btn-success btn-md btn-block">Get a new password!</button>
+                    </form>
+                    <!-- End of Form -->
+                </div>
             </div>
+            <br>
+            <p class="text-center"><a href="http://xkcd.com/936/"><i class="fa fa-key" aria-hidden="true"></i></a></p>
         </div>
-        <br>
-        <p class="text-center"><a href="http://xkcd.com/936/"><i class="fa fa-key" aria-hidden="true"></i></a></p>
-    </div>
     </body>
 </html>
