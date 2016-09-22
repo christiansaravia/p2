@@ -20,7 +20,7 @@
             <h1 class="text-center">Christian's xkcd Password Generator</h1>
             <br>
             <!-- Password Generated -->
-            <p class="text-center lead"><mark><?php echo $password_with_dashes; ?></mark></p>
+            <p class="text-center lead"><mark><?php echo $password; ?></mark></p>
             <!-- End of Password Generated -->
             <br>
             <div class="row">
@@ -29,7 +29,7 @@
                     <!-- Form -->
                     <form action="index.php" method="GET">
 
-                        <div class="form-group <?php echo $errorClass; ?>">
+                        <div class="form-group <?php if (isset($errorClass)) { echo $errorClass; } ?>">
                             <label>Number of words (#)</label>
                             <input class="form-control" type="text" name="num_of_words" placeholder="Maximum 9">
                             <?php if (isset($errorMessage)) { echo $errorMessage; } ?>
@@ -37,13 +37,13 @@
 
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="add_number"> Add a number
+                                <input type="checkbox" name="add_number" value="on"> Add a number
                             </label>
                         </div>
 
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="add_symbol"> Add a symbol
+                                <input type="checkbox" name="add_symbol" value="on"> Add a symbol
                             </label>
                         </div>
 

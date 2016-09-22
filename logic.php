@@ -1,11 +1,12 @@
 <?php
     # Default number of words for when the user does not provide one
     $default_length = 4;
+
     # A (small) array of words to use in generating passwords
-    $words = ["hello", "hi", "Chris", "Sophia", "Joey", "Ana", "tennis", "nba", "php", "ruby"];
+    $words = ["hello", "hi", "Chris", "chuki", "Zephyre", "Boston", "tennis", "nba", "php", "ruby"];
 
     # For when first loading the site, generate a random password of the default length of words
-    $password_with_dashes = generate_password($default_length, $words);
+    $password = generate_password($default_length, $words);
 
     foreach($_GET as $key => $value)
     {
@@ -15,20 +16,48 @@
             $errorClass = 'has-warning';
             $errorMessage = '<span class="help-block">You did not specify number of words. Showing a default 4 word long password.</span>';
 
-            #Generate a password with default length
-            $password_with_dashes = generate_password($default_length, $words);
+            # Generate a password with default length
+            $password = generate_password($default_length, $words);
+
+            # Add number if user asked for one
+            $number_add = (isset($_GET['add_number']) ? $_GET['add_number'] : null);
+            if($number_add == "on")
+            {
+                $password .= rand(0,9);
+            }
+
+            # Add symbol if user asked for one
+            $symbol_add = (isset($_GET['add_symbol']) ? $_GET['add_symbol'] : null);
+            if($symbol_add == "on")
+            {
+                $password .= '@';
+            }
 
             return;
 	    }
 
-        # Server validation if value has anything other than only numbers or is not within the accepted 0-9 range
+        # Server validation if value has anything other than only numbers or is not within the accepted 0-9 range (-x fails ctype_digit validation)
         elseif(!ctype_digit($value) || $value > 9)
         {
             $errorClass = 'has-error';
             $errorMessage = '<span class="help-block">You may only enter one digit (0-9); no letters or symbols. Showing a default 4 word long password.</span>';
 
             #Generate a password with default length
-            $password_with_dashes = generate_password($default_length, $words);
+            $password = generate_password($default_length, $words);
+
+            # Add number if user asked for one
+            $number_add = (isset($_GET['add_number']) ? $_GET['add_number'] : null);
+            if($number_add == "on")
+            {
+                $password .= rand(0,9);
+            }
+
+            # Add symbol if user asked for one
+            $symbol_add = (isset($_GET['add_symbol']) ? $_GET['add_symbol'] : null);
+            if($symbol_add == "on")
+            {
+                $password .= '@';
+            }
 
             return;
 	    }
@@ -40,7 +69,21 @@
             $errorMessage = '<span class="help-block">Great job there my friend! Enjoy your super awesome password.</span>';
 
             #Generate a password with the word length provided by the user
-            $password_with_dashes = generate_password($value, $words);
+            $password = generate_password($value, $words);
+
+            # Add number if user asked for one
+            $number_add = (isset($_GET['add_number']) ? $_GET['add_number'] : null);
+            if($number_add == "on")
+            {
+                $password .= rand(0,9);
+            }
+
+            # Add symbol if user asked for one
+            $symbol_add = (isset($_GET['add_symbol']) ? $_GET['add_symbol'] : null);
+            if($symbol_add == "on")
+            {
+                $password .= '@';
+            }
 
             return;
         }
@@ -50,19 +93,15 @@
     function generate_password($num_of_words, $words)
     {
         # Initiate empty password
-        $password = '';
+        $pwd = '';
         for($i = 0; $i < $num_of_words; $i++)
         {
             # Find random word from words array and concatenate to password
-            $password .= $words[array_rand($words)];
+            $pwd .= $words[array_rand($words)];
             # Add dashes between words
-            $password .= "-";
+            $pwd .= "-";
         }
         # Remove last dash
-        return rtrim($password, "-");
+        return rtrim($pwd, "-");
     }
-
-    # Need to work on this
-    # function add_number();
-    # function add_symbol();
 ?>
