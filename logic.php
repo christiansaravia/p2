@@ -2,8 +2,8 @@
     # Default number of words for when the user does not provide one
     $default_length = 4;
 
-    # A (small) array of words to use in generating passwords
-    $words = ["hello", "hi", "Chris", "chuki", "Zephyre", "Boston", "tennis", "nba", "php", "ruby"];
+    # A (Hamilton inspired) array of 20 words to use in generating passwords
+    $words = ["Alexander", "Hamilton", "ten", "dollar", "founding", "father", "Burr", "Eliza", "Angelica", "Lafayette", "rebellion", "scrappy", "hungry", "shot", "Washington", "Jefferson", "flag", "secretary", "united", "Miranda"];
 
     # For when first loading the site, generate a random password of the default length of words
     $password = generate_password($default_length, $words);
@@ -20,18 +20,10 @@
             $password = generate_password($default_length, $words);
 
             # Add number if user asked for one
-            $number_add = (isset($_GET['add_number']) ? $_GET['add_number'] : null);
-            if($number_add == "on")
-            {
-                $password .= rand(0,9);
-            }
+            add_number($password);
 
             # Add symbol if user asked for one
-            $symbol_add = (isset($_GET['add_symbol']) ? $_GET['add_symbol'] : null);
-            if($symbol_add == "on")
-            {
-                $password .= '@';
-            }
+            add_symbol($password);
 
             return;
 	    }
@@ -46,18 +38,10 @@
             $password = generate_password($default_length, $words);
 
             # Add number if user asked for one
-            $number_add = (isset($_GET['add_number']) ? $_GET['add_number'] : null);
-            if($number_add == "on")
-            {
-                $password .= rand(0,9);
-            }
+            add_number($password);
 
             # Add symbol if user asked for one
-            $symbol_add = (isset($_GET['add_symbol']) ? $_GET['add_symbol'] : null);
-            if($symbol_add == "on")
-            {
-                $password .= '@';
-            }
+            add_symbol($password);
 
             return;
 	    }
@@ -72,18 +56,10 @@
             $password = generate_password($value, $words);
 
             # Add number if user asked for one
-            $number_add = (isset($_GET['add_number']) ? $_GET['add_number'] : null);
-            if($number_add == "on")
-            {
-                $password .= rand(0,9);
-            }
+            add_number($password);
 
             # Add symbol if user asked for one
-            $symbol_add = (isset($_GET['add_symbol']) ? $_GET['add_symbol'] : null);
-            if($symbol_add == "on")
-            {
-                $password .= '@';
-            }
+            add_symbol($password);
 
             return;
         }
@@ -104,4 +80,25 @@
         # Remove last dash
         return rtrim($pwd, "-");
     }
+
+    # Adds a number to the end of the password, if user selected Add Number checkbox
+    function add_number(&$password)
+    {
+        $number_add = (isset($_GET['add_number']) ? $_GET['add_number'] : null);
+        if($number_add == "on")
+        {
+            $password .= rand(0,9);
+        }
+    }
+
+    # Adds a @ symbol to the end of the password, if user selected Add Symbol checkbox
+    function add_symbol(&$password)
+    {
+        $symbol_add = (isset($_GET['add_symbol']) ? $_GET['add_symbol'] : null);
+        if($symbol_add == "on")
+        {
+            $password .= '@';
+        }
+    }
+
 ?>
