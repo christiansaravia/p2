@@ -47,7 +47,7 @@
     }
 
     # Generates a password using as inputs the desired number of words and the array of possible words to pick from
-    function generate_password(int $num_of_words, $words)
+    function generate_password($num_of_words, $words)
     {
         # Initiate empty password
         $password = '';
