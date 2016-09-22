@@ -15,4 +15,5 @@ tbd
 No login required.
 
 ## Outside code
-tbd
+* Bootstrap: http://getbootstrap.com/
+* Font Awesome: http://fontawesome.io/
